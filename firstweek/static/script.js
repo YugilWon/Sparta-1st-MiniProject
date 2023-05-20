@@ -362,9 +362,12 @@ function display_edit_form(id, password) {
       });
 
       userData.forEach((element) => {
-        if (id === id) dropdown1 = element.to;
-        dropdown2 = element.from;
-        messageTextArea = element.content;
+        let originalDropdown1 = element.to;
+        let originalDropdown2 = element.from;
+
+        let dropdown1 = element.to;
+        let dropdown2 = element.from;
+        let messageTextArea = element.content;
 
         const modalContainer = document.createElement("div");
         modalContainer.className = "modal-container1";
@@ -415,11 +418,17 @@ function display_edit_form(id, password) {
           let formData = new FormData();
           formData.append("id_give", id);
           formData.append("password", password);
-          formData.append("edit_dropdown1_give", editDropdown1);
-          formData.append("edit_dropdown2_give", editDropdown2);
+          formData.append(
+            "edit_dropdown1_give",
+            editDropdown1 || originalDropdown1
+          );
+          formData.append(
+            "edit_dropdown2_give",
+            editDropdown2 || originalDropdown2
+          );
           formData.append("edit_messageTextArea_give", editMessageTextArea);
 
-          fetch("/userinfo", { method: "UPDATE", body: formData })
+          fetch("/userinfo", { method: "PUT", body: formData })
             .then((res) => res.json())
             .then((data) => {
               alert(data["msg"]);

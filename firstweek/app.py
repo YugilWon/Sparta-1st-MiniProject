@@ -63,12 +63,7 @@ def get_user_introduction():
 
 
 # UPDATE 부분
-#
-#
-#
-#
-#
-@app.route("/userinfo", methods=["UPDATE"])
+@app.route("/userinfo", methods=["PUT"])
 def userinfo_update():
     id_receive = request.form.get("id_give")
     password_receive = request.form.get("password")
@@ -113,11 +108,6 @@ def check_password():
         return jsonify({"msg": "불일치"})
 
 
-#
-#
-#
-#
-#
 # #DELETE 부분 이게 db에 저장될때는 String 으로 들어가고 id값은 float이라 강제 형변환시켜서 해결됐습니다!
 # DELETE 부분 비밀번호 검증 추가
 @app.route("/userinfo", methods=["DELETE"])
